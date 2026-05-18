@@ -3,134 +3,1097 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victo - 야구 직관 기록 & 승부 예측</title>
+    <meta name="description" content="빅토 Victo — 프로야구 직관 기록·승부 예측·나만의 직관 티켓까지. 내가 직관 가면 우리 팀이 이긴다? 빅토로 증명하세요.">
+    <title>빅토 Victo — 프로야구 직관 기록 & 승부 예측</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Jua&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* 색상 — Victo DesignSystem Tokens 동기화 */
+            --color-primary: #FF4B4B;        /* AppColors.primary — Victo Red */
+            --color-primary-hover: #D32F2F;  /* AppColors.primaryDark */
+            --color-bg-light: #F5EFE6;       /* AppColors.background — Cream */
+            --color-bg-mid: #EBE6DC;
+            --color-bg-deep: #DDD7CB;
+            --color-text-dark: #212121;      /* AppColors.textPrimary */
+            --color-text-mid: #757575;       /* AppColors.textSecondary */
+            --color-text-light: #9E9E9E;     /* AppColors.textTertiary */
+            --color-border: #E0DCDA;
+            --color-dark: #2c2c2c;
+            --color-brand-gray: #8E8B8B;     /* AppColors.brandGray */
+
+            /* 폰트 */
+            --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            --font-display: 'Jua', var(--font-system);    /* 헤드라인 — 임팩트 */
+            --font-body: 'Gowun Dodum', var(--font-system); /* 본문/카피 — 가독성 */
+            --font-brand: 'Fredoka', var(--font-system);
+            --shadow-card: 0 10px 40px rgba(0,0,0,0.08);
+            --shadow-phone: 0 30px 60px rgba(0,0,0,0.18);
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #E8E4E0 0%, #DDD8D3 100%);
-            min-height: 100vh;
-            color: #333;
+            font-family: var(--font-system);
+            background: var(--color-bg-light);
+            color: var(--color-text-dark);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+        img { display: block; max-width: 100%; height: auto; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ─── Hero ────────────────────────────────────────── */
+        .hero {
+            background: linear-gradient(135deg, #F5F0EB 0%, #DDD8D3 100%);
             padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
         }
-        .card {
-            background: #F5F0EB;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            border: 3px solid rgba(242, 107, 91, 0.5);
+        .hero-inner {
+            max-width: 980px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.05fr;
+            gap: 30px;
+            align-items: center;
         }
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
+        .hero-text { padding: 20px 0; }
+        .hero-brand {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 28px;
         }
-        .logo h1 {
-            font-size: 52px;
-            color: #F26B5B;
-            margin-bottom: 8px;
-            -webkit-text-stroke: 8px #7D7D7D;
+        .hero-brand h2 {
+            font-family: var(--font-brand);
+            font-size: 32px;
+            color: var(--color-primary);
+            font-weight: 700;
+            -webkit-text-stroke: 3.5px var(--color-brand-gray);
             paint-order: stroke fill;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+        .hero-brand .tagline {
+            font-family: var(--font-body);
+            color: var(--color-text-mid);
+            font-size: 16px;
+            font-weight: 400;
+        }
+        .hero h1 {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 46px;
+            font-weight: 400;
+            line-height: 1.18;
+            color: var(--color-text-dark);
+            margin-bottom: 14px;
+            letter-spacing: -0.3px;
+        }
+        .hero h1 .accent {
+            color: var(--color-primary);
+        }
+        .hero-sub {
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: var(--color-text-mid);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        /* 다운로드 버튼 (공용) */
+        .download-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--color-dark);
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: transform 0.15s, background 0.2s;
+            line-height: 1.1;
+        }
+        .download-btn:hover {
+            background: var(--color-primary);
+            transform: translateY(-2px);
+        }
+        .download-btn svg {
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+        .download-btn .label-sub {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.8;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .download-btn .label-main {
+            font-size: 16px;
             font-weight: 700;
         }
-        .logo p {
-            color: #7D7D7D;
-            font-size: 18px;
-            font-weight: 500;
+        /* OS 강조 — 비강조 버튼은 축소·반투명 */
+        .download-buttons.emphasize-ios .download-btn[data-store="android"],
+        .download-buttons.emphasize-android .download-btn[data-store="ios"] {
+            transform: scale(0.88);
+            opacity: 0.55;
         }
-        .description {
+        .download-buttons.emphasize-ios .download-btn[data-store="android"]:hover,
+        .download-buttons.emphasize-android .download-btn[data-store="ios"]:hover {
+            opacity: 1;
+            transform: scale(0.92) translateY(-2px);
+        }
+
+        /* Hero 폰 비주얼 */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .phone-mockup {
+            max-width: 240px;
+            width: 100%;
+            border-radius: 26px;
+            box-shadow: var(--shadow-phone);
+            border: 5px solid var(--color-dark);
+            transform: rotate(-2deg);
+            transition: transform 0.4s;
+        }
+        .phone-mockup:hover {
+            transform: rotate(0deg) translateY(-4px);
+        }
+
+        /* ── Hero 옵션 A: 10팀 X자 부채꼴 — 폰 큼(280×608) + X(0.9배) Y(0.4배), 컨테이너 작게 → 폰 위·아래 잘림 OK ── */
+        .team-fan-mini {
+            position: relative;
+            width: 100%;
+            max-width: 660px;
+            height: 510px;
+            margin: -40px auto 0;
+        }
+        .team-fan-mini .team-phone {
+            position: absolute;
+            width: 140px;
+            height: 304px;
+            background: #000;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 2.5px solid #2c2c2c;
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+            left: 50%;
+            top: 0;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            will-change: transform;
+        }
+        .team-fan-mini .team-phone img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+        /* X(margin-left) × 0.9 / Y(top) × 0.5 (위아래 살짝 더 벌림) */
+        /* 위 줄: T5 좌하 → T1 우상 */
+        .team-fan-mini .T5 { margin-left: -311px; top: 110px; transform: rotate(-30deg) translateZ(0); z-index: 1; }
+        .team-fan-mini .T4 { margin-left: -212px; top:  82px; transform: rotate(-15deg) translateZ(0); z-index: 2; }
+        .team-fan-mini .T3 { margin-left: -113px; top:  55px; transform: rotate(  0deg) translateZ(0); z-index: 3; }
+        .team-fan-mini .T2 { margin-left:  -14px; top:  27px; transform: rotate( 15deg) translateZ(0); z-index: 4; }
+        .team-fan-mini .T1 { margin-left:   85px; top:   0;   transform: rotate( 30deg) translateZ(0); z-index: 5; }
+        /* 아래 줄: B5 좌상 → B1 우하 */
+        .team-fan-mini .B5 { margin-left: -311px; top: 235px; transform: rotate(-30deg) translateZ(0); z-index: 6; }
+        .team-fan-mini .B4 { margin-left: -212px; top: 262px; transform: rotate(-15deg) translateZ(0); z-index: 7; }
+        .team-fan-mini .B3 { margin-left: -113px; top: 290px; transform: rotate(  0deg) translateZ(0); z-index: 8; }
+        .team-fan-mini .B2 { margin-left:  -14px; top: 317px; transform: rotate( 15deg) translateZ(0); z-index: 9; }
+        .team-fan-mini .B1 { margin-left:   85px; top: 345px; transform: rotate( 30deg) translateZ(0); z-index: 10; }
+
+
+        /* ─── 섹션 공용 ────────────────────────────────────── */
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 34px;
             text-align: center;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            color: #666;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+            font-weight: 400;
         }
-        .features {
+        .section-subtitle {
+            font-family: var(--font-body);
+            text-align: center;
+            color: var(--color-text-mid);
+            font-size: 16px;
+            margin-bottom: 56px;
+            font-weight: 400;
+        }
+
+        /* ─── ② 핵심 가치 ─────────────────────────────────── */
+        .values {
+            background: #fff;
+            padding: 80px 20px;
+        }
+        .values-inner { max-width: 1100px; margin: 0 auto; }
+        .value-cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
-        .feature {
+        .value-card {
+            background: var(--color-bg-light);
+            padding: 40px 28px;
+            border-radius: var(--radius-lg);
             text-align: center;
-            padding: 18px 10px;
-            background: #EBE6E1;
-            border-radius: 10px;
-            border: 1px solid #E0DCDA;
+            border: 2px solid transparent;
+            transition: border-color 0.3s, transform 0.2s;
         }
-        .feature-icon { font-size: 28px; margin-bottom: 8px; }
-        .feature-text { font-size: 13px; color: #5A5A5A; font-weight: 600; }
-        .links {
-            border-top: 1px solid #E0DCDA;
-            padding-top: 25px;
+        .value-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
         }
-        .links h3 {
+        .value-icon { font-size: 56px; margin-bottom: 16px; display: block; }
+        .value-card h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .value-card p {
+            font-family: var(--font-body);
+            color: var(--color-text-mid);
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* ─── ③ 기능 슬라이드 (풀너비) ────────────────────── */
+        .feature-slide {
+            padding: 40px 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        .feature-slide.bg-red   { background: #FF4B4B; }
+        .feature-slide.bg-cream { background: #F5EFE6; }
+        .feature-slide.bg-dark  { background: #1A1A2E; }
+
+        .feature-slide-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 50px;
+            align-items: center;
+            width: 100%;
+        }
+        /* 짝수 row: 좌 폰 + 우 텍스트 (alternating) */
+        .feature-slide.reverse .slide-text { order: 2; padding-left: 60px; }
+        .feature-slide.reverse .phone-fan { order: 1; }
+
+        .slide-text { /* 좌측 정렬 (default) */ }
+        .slide-logo {
+            font-family: var(--font-brand);
+            font-size: 18px;
+            letter-spacing: 2.5px;
+            margin-bottom: 16px;
+            color: rgba(245, 239, 230, 0.75);
+            font-weight: 600;
+        }
+        .feature-slide.bg-cream .slide-logo { color: rgba(0, 0, 0, 0.35); }
+
+        .slide-headline {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 40px;
+            line-height: 1.2;
+            color: #F5EFE6;
+            margin-bottom: 14px;
+            font-weight: 400;
+        }
+        .feature-slide.bg-cream .slide-headline { color: var(--color-text-dark); }
+        .slide-headline .accent { color: var(--color-primary); }
+        .feature-slide.bg-red .slide-headline .accent { color: #1A1A2E; }
+        .feature-slide.bg-dark .slide-headline .accent { color: var(--color-primary); }
+
+        .slide-subtitle {
+            font-family: var(--font-display);
+            font-size: 15px;
+            color: rgba(245, 239, 230, 0.85);
+            line-height: 1.65;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        .feature-slide.bg-cream .slide-subtitle { color: var(--color-text-mid); }
+
+        /* 폰 컨테이너 (우측 컬럼) — fan-3 / pair-2 / single 변형 지원 */
+        .phone-fan {
+            position: relative;
+            width: 100%;
+            max-width: 580px;
+            height: 480px;
+            margin: 0 auto;
+        }
+        .phone-fan .phone {
+            position: absolute;
+            width: 240px;
+            height: 521px;
+            background: #000;
+            border-radius: 32px;
+            overflow: hidden;
+            border: 4px solid #2c2c2c;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+            left: 50%;
+            top: 0;
+            /* GPU 가속 — 회전 시 안티앨리어싱 개선 */
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            will-change: transform;
+        }
+        /* Dynamic Island */
+        .phone-fan .phone::before {
+            content: '';
+            position: absolute;
+            top: 11px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 68px;
+            height: 18px;
+            background: #000;
+            border-radius: 11px;
+            z-index: 10;
+        }
+        .phone-fan .phone img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+        /* fan-3 (3폰 부채꼴) — default */
+        .phone-fan .phone.P_M {
+            margin-left: -120px;
+            top: 0;
+            z-index: 2;
+        }
+        .phone-fan .phone.P_L {
+            margin-left: -270px;
+            top: 50px;
+            transform: rotate(-12deg) translateZ(0);
+            z-index: 3;
+        }
+        .phone-fan .phone.P_R {
+            margin-left: 30px;
+            top: -30px;
+            transform: rotate(12deg) translateZ(0);
+            z-index: 1;
+        }
+
+        /* phone-fan 변형 — pair-2 (2폰), single (1폰) */
+        .phone-fan.pair-2 .phone {
+            width: 250px;
+            height: 542px;
+            border-radius: 34px;
+        }
+        .phone-fan.pair-2 .phone::before {
+            width: 70px; height: 18px;
+        }
+        .phone-fan.pair-2 .phone.P_L {
+            margin-left: -260px;
+            top: 20px;
+            transform: rotate(-8deg) translateZ(0);
+            z-index: 2;
+        }
+        .phone-fan.pair-2 .phone.P_R {
+            margin-left: 10px;
+            top: -20px;
+            transform: rotate(8deg) translateZ(0);
+            z-index: 1;
+        }
+
+        .phone-fan.single .phone {
+            width: 280px;
+            height: 608px;
+            border-radius: 38px;
+        }
+        .phone-fan.single .phone::before {
+            width: 78px; height: 20px;
+        }
+        .phone-fan.single .phone.P_M {
+            margin-left: -140px;
+            top: -20px;
+            transform: rotate(-3deg) translateZ(0);
+            z-index: 1;
+        }
+
+        /* 해시태그 (좌측 텍스트 컬럼 안) */
+        .slide-hashtags {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 0;
+        }
+        .slide-tag {
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: #F5EFE6;
+            background: rgba(245, 239, 230, 0.10);
+            border: 1px solid rgba(245, 239, 230, 0.25);
+            padding: 7px 18px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+        .feature-slide.bg-cream .slide-tag {
+            color: var(--color-primary);
+            background: rgba(255, 75, 75, 0.08);
+            border-color: rgba(255, 75, 75, 0.3);
+        }
+
+
+        /* ─── ④ 사용 시나리오 ─────────────────────────────── */
+        .scenario {
+            background: #fff;
+            padding: 80px 20px;
+        }
+        .scenario-inner { max-width: 1100px; margin: 0 auto; }
+        .scenario-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+        }
+        .scenario-step {
+            text-align: center;
+            padding: 26px 14px 22px;
+            background: var(--color-bg-light);
+            border-radius: var(--radius-lg);
+        }
+
+        /* 상시 활동 (부가) */
+        .scenario-extras {
+            margin-top: 44px;
+            padding-top: 28px;
+            border-top: 1px dashed var(--color-border);
+            text-align: center;
+        }
+        .scenario-extras-title {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--color-text-light);
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+        .scenario-extras-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .extra-item {
+            background: var(--color-bg-light);
+            border-radius: var(--radius-md);
+            padding: 16px 12px;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .extra-item:hover { background: var(--color-bg-mid); }
+        .extra-icon { font-size: 28px; display: block; margin-bottom: 6px; }
+        .extra-label {
+            font-family: var(--font-display);
+            font-size: 15px;
+            color: var(--color-text-dark);
+            margin-bottom: 2px;
+            display: block;
+        }
+        .extra-desc {
+            font-family: var(--font-body);
             font-size: 12px;
-            color: #999;
-            margin-bottom: 15px;
+            color: var(--color-text-mid);
+            line-height: 1.5;
+        }
+        .step-num {
+            width: 36px;
+            height: 36px;
+            background: var(--color-primary);
+            color: #fff;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 400;
+            margin-bottom: 14px;
+            font-family: var(--font-display);
+            font-size: 18px;
+        }
+        .step-icon { font-size: 40px; margin-bottom: 10px; display: block; }
+        .scenario-step h4 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--color-text-dark);
+            margin-bottom: 6px;
+            font-weight: 400;
+        }
+        .scenario-step p {
+            font-family: var(--font-body);
+            color: var(--color-text-mid);
+            font-size: 14px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* ─── ⑤ 2차 CTA ──────────────────────────────────── */
+        .cta-final {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: #fff;
+        }
+        .cta-final h2 {
+            font-family: var(--font-display);
+            font-size: 40px;
+            margin-bottom: 16px;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+        .cta-final p {
+            font-family: var(--font-body);
+            font-size: 18px;
+            opacity: 0.95;
+            margin-bottom: 36px;
+            font-weight: 400;
+        }
+        .cta-final .download-buttons { justify-content: center; }
+        .cta-final .download-btn {
+            background: #fff;
+            color: var(--color-primary);
+        }
+        .cta-final .download-btn:hover {
+            background: var(--color-dark);
+            color: #fff;
+        }
+
+        /* ─── Footer ──────────────────────────────────────── */
+        .footer {
+            background: var(--color-bg-mid);
+            padding: 40px 20px;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .footer h4 {
+            font-size: 12px;
+            color: var(--color-text-light);
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
-        .links a {
+        .footer a {
             display: block;
-            padding: 12px 0;
-            color: #5A5A5A;
-            text-decoration: none;
-            border-bottom: 1px solid #E0DCDA;
+            padding: 6px 0;
+            color: var(--color-text-mid);
+            font-size: 14px;
             transition: color 0.2s;
         }
-        .links a:hover { color: #F26B5B; }
-        .links a:last-child { border-bottom: none; }
-        .contact {
-            margin-top: 25px;
-            text-align: center;
-            font-size: 14px;
-            color: #999;
+        .footer a:hover { color: var(--color-primary); }
+        .footer-contact a {
+            color: var(--color-primary);
+            font-weight: 500;
+            display: inline;
         }
-        .contact a { color: #F26B5B; font-weight: 500; }
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+            color: var(--color-text-light);
+            font-size: 12px;
+        }
+
+        /* ─── 반응형 ───────────────────────────────────────── */
+        @media (max-width: 800px) {
+            .hero { padding: 40px 20px 60px; }
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-brand { justify-content: center; }
+            .hero h1 { font-size: 36px; }
+            .hero-sub { font-size: 17px; }
+            .download-buttons { justify-content: center; }
+            .hero-visual { min-height: auto; order: -1; }
+            .phone-mockup { max-width: 260px; }
+
+            .values, .scenario, .cta-final { padding: 60px 20px; }
+            .feature-slide { padding: 70px 20px; }
+            .section-title { font-size: 28px; }
+            .section-subtitle { font-size: 15px; margin-bottom: 40px; }
+
+            .value-cards { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+            /* 1단 스택 + 가운데 정렬로 복귀 */
+            .feature-slide-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .feature-slide.reverse .slide-text { order: 0; padding-left: 0; }
+            .feature-slide.reverse .phone-fan { order: 0; }
+            .slide-hashtags { justify-content: center; gap: 8px; margin-top: 24px; }
+            .slide-text { display: flex; flex-direction: column; align-items: center; }
+
+            .slide-headline { font-size: 42px; }
+            .slide-subtitle { font-size: 16px; margin-bottom: 24px; }
+            .phone-fan { height: 500px; max-width: 480px; }
+            .phone-fan .phone { width: 180px; height: 390px; border-radius: 26px; }
+            .phone-fan .phone::before { width: 50px; height: 13px; top: 8px; }
+            .phone-fan .phone.P_M { margin-left: -90px; top: 50px; }
+            .phone-fan .phone.P_L { margin-left: -200px; top: 90px; transform: rotate(-10deg); }
+            .phone-fan .phone.P_R { margin-left: 20px; top: 10px; transform: rotate(10deg); }
+            .slide-tag { font-size: 13px; padding: 6px 14px; }
+
+            .scenario-steps { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .scenario-extras-grid { grid-template-columns: repeat(2, 1fr); }
+
+            .cta-final h2 { font-size: 30px; }
+            .cta-final p { font-size: 16px; }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 30px; }
+            .hero-brand h2 { font-size: 36px; }
+            .download-btn { padding: 12px 16px; }
+            .download-btn .label-main { font-size: 14px; }
+            .section-title { font-size: 24px; }
+            .cta-final h2 { font-size: 26px; }
+
+            .slide-headline { font-size: 36px; }
+            .slide-subtitle { font-size: 14px; }
+            .phone-fan { height: 400px; max-width: 340px; }
+            .phone-fan .phone { width: 140px; height: 304px; border-radius: 22px; }
+            .phone-fan .phone::before { width: 40px; height: 11px; top: 7px; }
+            .phone-fan .phone.P_M { margin-left: -70px; top: 45px; }
+            .phone-fan .phone.P_L { margin-left: -155px; top: 80px; transform: rotate(-8deg); }
+            .phone-fan .phone.P_R { margin-left: 15px; top: 10px; transform: rotate(8deg); }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="logo">
-                <h1>Victo</h1>
-                <p>야구 직관 기록 & 승부 예측</p>
+
+    <!-- ① HERO ────────────────────────────────────────────── -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <div class="hero-brand">
+                    <h2>Victo</h2>
+                    <span class="tagline">빅토</span>
+                </div>
+                <h1>
+                    내가 직관 가면<br>
+                    <span class="accent">우리 팀이 이긴다?</span>
+                </h1>
+                <p class="hero-sub">
+                    프로야구 직관을 기록하고, 승률을 분석하고,<br>
+                    승부를 예측하고, 나만의 티켓으로 자랑하세요.<br>
+                    진짜 승리요정을 데이터로 증명해보세요.
+                </p>
+                <div class="download-buttons" id="downloadButtonsHero">
+                    <a class="download-btn" data-store="ios" href="https://apps.apple.com/kr/app/id6768068985" aria-label="App Store에서 다운로드">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M17.05 12.04c-.03-2.69 2.2-3.98 2.3-4.05-1.25-1.83-3.2-2.08-3.89-2.11-1.66-.17-3.24.97-4.09.97-.85 0-2.15-.95-3.54-.92-1.82.03-3.5 1.06-4.44 2.69-1.89 3.28-.48 8.13 1.36 10.8.9 1.31 1.97 2.78 3.37 2.72 1.36-.05 1.87-.88 3.51-.88 1.64 0 2.1.88 3.54.85 1.46-.02 2.39-1.33 3.28-2.65 1.03-1.52 1.46-2.99 1.48-3.07-.03-.01-2.84-1.09-2.88-4.35zM14.4 4.13c.74-.9 1.24-2.15 1.1-3.39-1.07.04-2.36.71-3.13 1.61-.69.79-1.29 2.06-1.13 3.27 1.19.09 2.41-.6 3.16-1.49z"/>
+                        </svg>
+                        <span>
+                            <span class="label-sub">App Store</span>
+                            <span class="label-main">iOS 다운로드</span>
+                        </span>
+                    </a>
+                    <a class="download-btn" data-store="android" href="https://play.google.com/store/apps/details?id=com.gwsticktogether.victo" aria-label="Google Play에서 다운로드">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.61 1.81C3.23 2.21 3 2.83 3 3.63v16.74c0 .8.23 1.42.61 1.82l.06.05L13.06 12 3.67 1.76l-.06.05zM16.66 8.34l-2.6-1.5L4.69.31c-.46-.27-.9-.27-1.18 0L14.06 11l2.6-2.66zM19.61 13.18c.62-.49.97-1.1.97-1.74 0-.64-.34-1.25-.97-1.74L17.13 8.39 14.42 11l2.71 2.59 2.48-1.41zM13.06 12l-9.39 9.24c.28.27.72.27 1.18 0l11.81-6.71L16.66 14.66z"/>
+                        </svg>
+                        <span>
+                            <span class="label-sub">Google Play</span>
+                            <span class="label-main">Android 다운로드</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="team-fan-mini" aria-label="KBO 10개 구단">
+                    <div class="team-phone T5"><img src="feature-screens/s1_teams/team5.png" alt="팀5"></div>
+                    <div class="team-phone T4"><img src="feature-screens/s1_teams/team4.png" alt="팀4"></div>
+                    <div class="team-phone T3"><img src="feature-screens/s1_teams/team3.png" alt="팀3"></div>
+                    <div class="team-phone T2"><img src="feature-screens/s1_teams/team2.png" alt="팀2"></div>
+                    <div class="team-phone T1"><img src="feature-screens/s1_teams/team1.png" alt="팀1"></div>
+                    <div class="team-phone B5"><img src="feature-screens/s1_teams/team6.png" alt="팀6"></div>
+                    <div class="team-phone B4"><img src="feature-screens/s1_teams/team7.png" alt="팀7"></div>
+                    <div class="team-phone B3"><img src="feature-screens/s1_teams/team8.png" alt="팀8"></div>
+                    <div class="team-phone B2"><img src="feature-screens/s1_teams/team9.png" alt="팀9"></div>
+                    <div class="team-phone B1"><img src="feature-screens/s1_teams/team10.png" alt="팀10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ② 핵심 가치 ─────────────────────────────────────── -->
+    <section class="values">
+        <div class="values-inner">
+            <h2 class="section-title">빅토와 함께라면</h2>
+            <p class="section-subtitle">직관이 더 특별해집니다</p>
+            <div class="value-cards">
+                <div class="value-card">
+                    <span class="value-icon">📝</span>
+                    <h3>기록한다</h3>
+                    <p>직관 한 경기 한 경기를<br>꼼꼼하게, 그리고 데이터로</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🔮</span>
+                    <h3>예측한다</h3>
+                    <p>오늘 경기를 미리,<br>맞히면 포인트와 명예까지</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🎫</span>
+                    <h3>꾸민다</h3>
+                    <p>오늘의 직관을 한 장에,<br>친구·SNS에 자랑하는 추억으로</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🏆</span>
+                    <h3>경쟁한다</h3>
+                    <p>친구·그룹·전국 팬들과<br>승리요정 자리를 두고 한판</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ③ 기능 슬라이드 — S2 직관 기록 (좌 텍스트 + 우 폰) ──────────── -->
+    <section class="feature-slide bg-red">
+        <div class="feature-slide-inner">
+            <div class="slide-text">
+                <div class="slide-logo">Victo</div>
+                <h2 class="slide-headline">
+                    직관 기록을<br>캘린더로
+                </h2>
+                <p class="slide-subtitle">
+                    누구랑 갔는지, 무엇을 먹었는지, 찍은 사진까지<br>
+                    내 직관을 기록하자
+                </p>
+                <div class="slide-hashtags">
+                    <span class="slide-tag">#직관기록</span>
+                    <span class="slide-tag">#야구캘린더</span>
+                    <span class="slide-tag">#야구직관</span>
+                </div>
+            </div>
+            <div class="phone-fan">
+                <div class="phone P_L"><img src="feature-screens/s2_record/screen1.png" loading="lazy" alt="달력 뷰"></div>
+                <div class="phone P_M"><img src="feature-screens/s2_record/screen2.png" loading="lazy" alt="기록 상세"></div>
+                <div class="phone P_R"><img src="feature-screens/s2_record/screen3.png" loading="lazy" alt="경기 목록"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ③-2 S3 승률 분석 (cream, 1폰, reverse) ─────────── -->
+    <section class="feature-slide bg-cream reverse">
+        <div class="feature-slide-inner">
+            <div class="slide-text">
+                <div class="slide-logo">Victo</div>
+                <h2 class="slide-headline">
+                    기록하면 보이는<br><span class="accent">내 직관 승률</span>
+                </h2>
+                <p class="slide-subtitle">
+                    구단별·상대팀별·구장별<br>
+                    자동 분석으로 한눈에 확인하세요
+                </p>
+                <div class="slide-hashtags">
+                    <span class="slide-tag">#승률분석</span>
+                    <span class="slide-tag">#상대팀전적</span>
+                    <span class="slide-tag">#구장별기록</span>
+                </div>
+            </div>
+            <div class="phone-fan single">
+                <div class="phone P_M"><img src="feature-screens/s3_analysis/screen1.png" loading="lazy" alt="승률 분석"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ③-3 S4 예측 (red, 3폰 fan) ─────────────────────── -->
+    <section class="feature-slide bg-red">
+        <div class="feature-slide-inner">
+            <div class="slide-text">
+                <div class="slide-logo">Victo</div>
+                <h2 class="slide-headline">
+                    운이 아니라<br>실력으로 증명하세요
+                </h2>
+                <p class="slide-subtitle">
+                    경기마다 다양한 방식으로 예측하고<br>
+                    포인트를 쌓아 랭킹 1위에 도전하세요
+                </p>
+                <div class="slide-hashtags">
+                    <span class="slide-tag">#경기예측</span>
+                    <span class="slide-tag">#예측분석</span>
+                    <span class="slide-tag">#포인트적립</span>
+                </div>
+            </div>
+            <div class="phone-fan">
+                <div class="phone P_L"><img src="feature-screens/s4_prediction/screen1.png" loading="lazy" alt="예측 1"></div>
+                <div class="phone P_M"><img src="feature-screens/s4_prediction/screen2.png" loading="lazy" alt="예측 2"></div>
+                <div class="phone P_R"><img src="feature-screens/s4_prediction/screen3.png" loading="lazy" alt="예측 3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ③-4 S5 랭킹 (dark, 2폰 pair, reverse) ──────────── -->
+    <section class="feature-slide bg-dark reverse">
+        <div class="feature-slide-inner">
+            <div class="slide-text">
+                <div class="slide-logo">Victo</div>
+                <h2 class="slide-headline">
+                    직관도, 예측도<br><span class="accent">1등은 나야</span>
+                </h2>
+                <p class="slide-subtitle">
+                    포인트 순위로 내 위치를 확인하고<br>
+                    명예의 전당에 이름을 올리세요
+                </p>
+                <div class="slide-hashtags">
+                    <span class="slide-tag">#직관랭킹</span>
+                    <span class="slide-tag">#예측랭킹</span>
+                    <span class="slide-tag">#명예의전당</span>
+                </div>
+            </div>
+            <div class="phone-fan pair-2">
+                <div class="phone P_L"><img src="feature-screens/s5_ranking/screen1.png" loading="lazy" alt="직관 랭킹"></div>
+                <div class="phone P_R"><img src="feature-screens/s5_ranking/screen2.png" loading="lazy" alt="예측 랭킹"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ③-5 S6 커뮤니티 (cream, 2폰 pair) ──────────────── -->
+    <section class="feature-slide bg-cream">
+        <div class="feature-slide-inner">
+            <div class="slide-text">
+                <div class="slide-logo">Victo</div>
+                <h2 class="slide-headline">
+                    직관 메이트와<br><span class="accent">함께하세요</span>
+                </h2>
+                <p class="slide-subtitle">
+                    같은 팀 팬들과 게시판에서 소통하고<br>
+                    그룹을 만들어 직관 메이트와 함께하세요
+                </p>
+                <div class="slide-hashtags">
+                    <span class="slide-tag">#직관그룹</span>
+                    <span class="slide-tag">#팬커뮤니티</span>
+                    <span class="slide-tag">#야구팀모임</span>
+                </div>
+            </div>
+            <div class="phone-fan pair-2">
+                <div class="phone P_L"><img src="feature-screens/s6_community/screen1.png" loading="lazy" alt="커뮤니티"></div>
+                <div class="phone P_R"><img src="feature-screens/s6_community/screen2.png" loading="lazy" alt="그룹"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ③-6 S7 직관 티켓 (cream, 3폰 fan, reverse) ─────── -->
+    <section class="feature-slide bg-cream reverse">
+        <div class="feature-slide-inner">
+            <div class="slide-text">
+                <div class="slide-logo">Victo</div>
+                <h2 class="slide-headline">
+                    내가 만드는<br><span class="accent">직관 티켓</span>
+                </h2>
+                <p class="slide-subtitle">
+                    스티커로 꾸미고 모아서 자랑해요<br>
+                    오늘의 직관이 한 장의 티켓이 됩니다
+                </p>
+                <div class="slide-hashtags">
+                    <span class="slide-tag">#공유티켓</span>
+                    <span class="slide-tag">#나만의티켓</span>
+                    <span class="slide-tag">#모아보기</span>
+                </div>
+            </div>
+            <div class="phone-fan">
+                <div class="phone P_L"><img src="feature-screens/s7_ticket/screen1.png" loading="lazy" alt="티켓 편집"></div>
+                <div class="phone P_M"><img src="feature-screens/s7_ticket/screen2.png" loading="lazy" alt="티켓 보기"></div>
+                <div class="phone P_R"><img src="feature-screens/s7_ticket/screen3.png" loading="lazy" alt="티켓 모아보기"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ④ 사용 시나리오 ─────────────────────────────────── -->
+    <section class="scenario">
+        <div class="scenario-inner">
+            <h2 class="section-title">빅토 사용법</h2>
+            <p class="section-subtitle">5스텝이면 끝</p>
+            <div class="scenario-steps">
+                <div class="scenario-step">
+                    <span class="step-num">1</span>
+                    <span class="step-icon">🔮</span>
+                    <h4>예측한다</h4>
+                    <p>오늘 경기 결과<br>미리 맞혀보기</p>
+                </div>
+                <div class="scenario-step">
+                    <span class="step-num">2</span>
+                    <span class="step-icon">🏟️</span>
+                    <h4>직관 간다</h4>
+                    <p>좋아하는 팀<br>경기 보러 출발</p>
+                </div>
+                <div class="scenario-step">
+                    <span class="step-num">3</span>
+                    <span class="step-icon">📝</span>
+                    <h4>기록한다</h4>
+                    <p>좌석·먹거리·<br>사진 한 번에</p>
+                </div>
+                <div class="scenario-step">
+                    <span class="step-num">4</span>
+                    <span class="step-icon">🎫</span>
+                    <h4>티켓 만든다</h4>
+                    <p>나만의 스티커로<br>꾸미기</p>
+                </div>
+                <div class="scenario-step">
+                    <span class="step-num">5</span>
+                    <span class="step-icon">📤</span>
+                    <h4>자랑한다</h4>
+                    <p>친구·SNS에<br>한 장으로 공유</p>
+                </div>
             </div>
 
-            <p class="description">
-                가족, 친구들과 함께하는 야구<br>
-                직관 기록을 공유하고 예측 랭킹 1위에 도전하세요.
-            </p>
-
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-icon">📝</div>
-                    <div class="feature-text">직관 기록</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🔮</div>
-                    <div class="feature-text">승부 예측</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🏆</div>
-                    <div class="feature-text">랭킹</div>
+            <div class="scenario-extras">
+                <div class="scenario-extras-title">이런 것도 가능해요</div>
+                <div class="scenario-extras-grid">
+                    <div class="extra-item">
+                        <span class="extra-icon">📊</span>
+                        <span class="extra-label">분석</span>
+                        <span class="extra-desc">내 직관 기록<br>구단·구장별</span>
+                    </div>
+                    <div class="extra-item">
+                        <span class="extra-icon">🏆</span>
+                        <span class="extra-label">랭킹</span>
+                        <span class="extra-desc">전국 팬과 경쟁</span>
+                    </div>
+                    <div class="extra-item">
+                        <span class="extra-icon">🤝</span>
+                        <span class="extra-label">그룹</span>
+                        <span class="extra-desc">직관 메이트와</span>
+                    </div>
+                    <div class="extra-item">
+                        <span class="extra-icon">🗣️</span>
+                        <span class="extra-label">커뮤니티</span>
+                        <span class="extra-desc">팀별 게시판</span>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="links">
-                <h3>정책 및 약관</h3>
+    <!-- ⑤ 2차 CTA ───────────────────────────────────────── -->
+    <section class="cta-final">
+        <h2>지금 빅토와 함께,<br>이번 시즌 승리요정이 되세요</h2>
+        <p>이번 시즌 승리요정, 당신이 될 차례</p>
+        <div class="download-buttons" id="downloadButtonsFinal">
+            <a class="download-btn" data-store="ios" href="https://apps.apple.com/kr/app/id6768068985" aria-label="App Store에서 다운로드">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M17.05 12.04c-.03-2.69 2.2-3.98 2.3-4.05-1.25-1.83-3.2-2.08-3.89-2.11-1.66-.17-3.24.97-4.09.97-.85 0-2.15-.95-3.54-.92-1.82.03-3.5 1.06-4.44 2.69-1.89 3.28-.48 8.13 1.36 10.8.9 1.31 1.97 2.78 3.37 2.72 1.36-.05 1.87-.88 3.51-.88 1.64 0 2.1.88 3.54.85 1.46-.02 2.39-1.33 3.28-2.65 1.03-1.52 1.46-2.99 1.48-3.07-.03-.01-2.84-1.09-2.88-4.35zM14.4 4.13c.74-.9 1.24-2.15 1.1-3.39-1.07.04-2.36.71-3.13 1.61-.69.79-1.29 2.06-1.13 3.27 1.19.09 2.41-.6 3.16-1.49z"/>
+                </svg>
+                <span>
+                    <span class="label-sub">App Store</span>
+                    <span class="label-main">iOS 다운로드</span>
+                </span>
+            </a>
+            <a class="download-btn" data-store="android" href="https://play.google.com/store/apps/details?id=com.gwsticktogether.victo" aria-label="Google Play에서 다운로드">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M3.61 1.81C3.23 2.21 3 2.83 3 3.63v16.74c0 .8.23 1.42.61 1.82l.06.05L13.06 12 3.67 1.76l-.06.05zM16.66 8.34l-2.6-1.5L4.69.31c-.46-.27-.9-.27-1.18 0L14.06 11l2.6-2.66zM19.61 13.18c.62-.49.97-1.1.97-1.74 0-.64-.34-1.25-.97-1.74L17.13 8.39 14.42 11l2.71 2.59 2.48-1.41zM13.06 12l-9.39 9.24c.28.27.72.27 1.18 0l11.81-6.71L16.66 14.66z"/>
+                </svg>
+                <span>
+                    <span class="label-sub">Google Play</span>
+                    <span class="label-main">Android 다운로드</span>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ⑥ Footer ──────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <h4>정책 및 약관</h4>
                 <a href="https://winneranglebot.github.io/app_policy/privacy.html">개인정보처리방침</a>
                 <a href="https://winneranglebot.github.io/app_policy/terms.html">서비스 이용약관</a>
                 <a href="https://winneranglebot.github.io/app_policy/opensource.html">오픈소스 라이선스</a>
             </div>
-
-            <div class="contact">
-                문의: <a href="mailto:gwsticktogether@gmail.com">gwsticktogether@gmail.com</a>
+            <div class="footer-contact">
+                <h4>문의</h4>
+                <a href="mailto:gwsticktogether@gmail.com">gwsticktogether@gmail.com</a>
             </div>
         </div>
-    </div>
+        <div class="footer-bottom">
+            © 2026 Winner Angle Project · Victo
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        // ─── OS 감지 + UTM 전달 ──────────────────────────────────────
+        var ua = navigator.userAgent || '';
+        var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+                    (ua.indexOf('Mac') !== -1 && 'ontouchend' in document); // iPadOS
+        var isAndroid = /android/i.test(ua);
+
+        var params = new URLSearchParams(window.location.search);
+        var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+
+        function appendUtmToUrl(rawUrl) {
+            try {
+                var u = new URL(rawUrl);
+                utmKeys.forEach(function (k) {
+                    if (params.has(k)) u.searchParams.set(k, params.get(k));
+                });
+                return u.toString();
+            } catch (e) { return rawUrl; }
+        }
+
+        // Play Store는 referrer 형식(`referrer=key=val&key=val`)으로 전달 — Install Referrer 어트리뷰션
+        function buildAndroidUrl(rawUrl) {
+            try {
+                var u = new URL(rawUrl);
+                var parts = [];
+                utmKeys.forEach(function (k) {
+                    if (params.has(k)) parts.push(k + '=' + encodeURIComponent(params.get(k)));
+                });
+                if (parts.length) u.searchParams.set('referrer', parts.join('&'));
+                return u.toString();
+            } catch (e) { return rawUrl; }
+        }
+
+        // 페이지 내 모든 다운로드 버튼에 적용 (Hero + 2차 CTA 등)
+        document.querySelectorAll('.download-btn[data-store="ios"]').forEach(function (btn) {
+            btn.href = appendUtmToUrl(btn.getAttribute('href'));
+        });
+        document.querySelectorAll('.download-btn[data-store="android"]').forEach(function (btn) {
+            btn.href = buildAndroidUrl(btn.getAttribute('href'));
+        });
+        document.querySelectorAll('.download-buttons').forEach(function (container) {
+            if (isIOS) container.classList.add('emphasize-ios');
+            else if (isAndroid) container.classList.add('emphasize-android');
+        });
+    })();
+    </script>
 </body>
 </html>
