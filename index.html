@@ -652,10 +652,10 @@
             /* 모바일에선 텍스트 먼저, 폰 부채꼴 아래로 (order 제거) */
             .hero-visual { min-height: auto; }
             .phone-mockup { max-width: 260px; }
-            /* Hero 폰 부채꼴 모바일 축소 (54%) + 중앙 정렬 + Y 간격 확장 */
+            /* Hero 폰 부채꼴 모바일 축소 (54%) + 중앙 정렬 + X 좁힘 + Y 더 벌림 */
             .team-fan-mini {
                 max-width: 360px;
-                height: 340px;
+                height: 400px;
                 margin: 0 auto;
             }
             .team-fan-mini .team-phone {
@@ -665,18 +665,18 @@
                 border-width: 1.5px;
                 box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
             }
-            /* margin-left에 +38 → 폰 중심을 컨테이너 중앙에 정렬 */
-            /* B 라인 top +20 → Y축 간격 더 벌림 */
-            .team-fan-mini .T5 { margin-left: -130px; top: 50px; }
-            .team-fan-mini .T4 { margin-left: -76px;  top: 36px; }
-            .team-fan-mini .T3 { margin-left: -23px;  top: 22px; }
-            .team-fan-mini .T2 { margin-left: 30px;   top: 10px; }
-            .team-fan-mini .T1 { margin-left: 84px;   top: 0; }
-            .team-fan-mini .B5 { margin-left: -130px; top: 150px; }
-            .team-fan-mini .B4 { margin-left: -76px;  top: 164px; }
-            .team-fan-mini .B3 { margin-left: -23px;  top: 180px; }
-            .team-fan-mini .B2 { margin-left: 30px;   top: 194px; }
-            .team-fan-mini .B1 { margin-left: 84px;   top: 208px; }
+            /* X 간격 45px(이전 53), 폰 중심을 컨테이너 중앙에 정렬 */
+            /* Y: T 라인 위로 / B 라인 더 아래로 → 위·아래 간격 확장 */
+            .team-fan-mini .T5 { margin-left: -128px; top: 30px; }
+            .team-fan-mini .T4 { margin-left: -83px;  top: 22px; }
+            .team-fan-mini .T3 { margin-left: -37px;  top: 14px; }
+            .team-fan-mini .T2 { margin-left: 8px;    top: 7px; }
+            .team-fan-mini .T1 { margin-left: 53px;   top: 0; }
+            .team-fan-mini .B5 { margin-left: -128px; top: 180px; }
+            .team-fan-mini .B4 { margin-left: -83px;  top: 190px; }
+            .team-fan-mini .B3 { margin-left: -37px;  top: 200px; }
+            .team-fan-mini .B2 { margin-left: 8px;    top: 209px; }
+            .team-fan-mini .B1 { margin-left: 53px;   top: 218px; }
 
             .values, .scenario, .cta-final { padding: 40px 16px; }
             .feature-slide { padding: 70px 20px; }
